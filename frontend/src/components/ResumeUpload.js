@@ -1,38 +1,64 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function ResumeUpload() {
   const [file, setFile] = useState(null);
-  const [message, setMessage] = useState('');
+  const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    setMessage('');
+    setResponse(null);
+    setError(null);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
-      setMessage('Please upload a resume file first.');
+      setError('Please select a file first');
       return;
     }
-    setMessage('Resume uploaded successfully! (Backend integration coming soon)');
+
+    const formData = new FormData();
+    formData.append('resume', file);
+
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await axios.post('http://localhost:5000/api/analyze', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setResponse(res.data);
+    } catch (err) {
+      setError('Upload failed. Try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="resume-upload" style={{ color: '#fff' }}>
+    <div>
       <form onSubmit={handleSubmit}>
-        <input
-          type="file"
-          accept=".pdf,.doc,.docx"
-          onChange={handleFileChange}
-          style={{ marginBottom: '10px' }}
-        />
-        <br />
-        <button type="submit" className="btn btn-warning">
-          Upload Resume
+        <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} />
+        <button type="submit" disabled={loading}>
+          {loading ? 'Uploading...' : 'Upload Resume'}
         </button>
       </form>
-      {message && <p style={{ marginTop: '10px', color: 'orange' }}>{message}</p>}
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {response && (
+        <div>
+          <h3>Analysis Result</h3>
+          <p>{response.message}</p>
+          <p>Filename: {response.filename}</p>
+          {/* You can also show analysis details here */}
+          <pre>{JSON.stringify(response.analysis, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
 }

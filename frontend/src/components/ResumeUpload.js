@@ -26,7 +26,7 @@ function ResumeUpload() {
     try {
       setLoading(true);
       setError(null);
-      const res = await axios.post('http://localhost:5000/api/analyze', formData, {
+      const res = await axios.post('/api/analyze', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -55,7 +55,6 @@ function ResumeUpload() {
           <h3>Analysis Result</h3>
           <p>{response.message}</p>
           <p>Filename: {response.filename}</p>
-          {/* You can also show analysis details here */}
           <pre>{JSON.stringify(response.analysis, null, 2)}</pre>
         </div>
       )}

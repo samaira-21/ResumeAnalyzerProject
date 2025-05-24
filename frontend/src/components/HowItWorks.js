@@ -9,13 +9,13 @@ const steps = [
   },
   {
     number: 2,
-    title: "Automatic Analysis",
-    description: "Our AI scans your resume for keywords, format, grammar, and overall quality.",
+    title: "Automatic Scoring",
+    description: "Our system evaluates your resume using key factors like format, keywords, and grammar.",
   },
   {
     number: 3,
     title: "Get Detailed Feedback",
-    description: "Receive instant suggestions on improving content, layout, and keywords.",
+    description: "Receive instant suggestions on improving content, layout, and keywords based on your score.",
   },
   {
     number: 4,

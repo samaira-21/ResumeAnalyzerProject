@@ -21,15 +21,14 @@ function ResumeUpload() {
     }
 
     const formData = new FormData();
-    formData.append('resume', file);
+    formData.append('resume', file);  // key 'resume' must match backend multer field name
 
     try {
       setLoading(true);
       setError(null);
-      const res = await axios.post('/api/analyze', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      setResponse(null);
+      const res = await axios.post('http://localhost:5000/api/analyze', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
       setResponse(res.data);
     } catch (err) {
@@ -40,22 +39,44 @@ function ResumeUpload() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Uploading...' : 'Upload Resume'}
+    <div className="container mt-5">
+      <h2 className="text-warning mb-3">Upload Your Resume</h2>
+      <form onSubmit={handleSubmit} className="mb-3">
+        <input
+          type="file"
+          accept=".pdf,.doc,.docx"
+          className="form-control mb-3"
+          onChange={handleFileChange}
+        />
+        <button type="submit" className="btn btn-warning" disabled={loading}>
+          {loading ? 'Analyzing...' : 'Upload Resume'}
         </button>
       </form>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {loading && (
+        <p className="text-info">Please wait, your resume is being analyzed...</p>
+      )}
+
+      {error && <p className="text-danger">{error}</p>}
 
       {response && (
-        <div>
-          <h3>Analysis Result</h3>
-          <p>{response.message}</p>
-          <p>Filename: {response.filename}</p>
-          <pre>{JSON.stringify(response.analysis, null, 2)}</pre>
+        <div className="mt-4">
+          <h4 className="text-success">Analysis Result</h4>
+          <p><strong>Message:</strong> {response.message}</p>
+          <p><strong>Filename:</strong> {response.filename}</p>
+          {response.analysis && response.analysis.score && (
+            <p><strong>Score:</strong> {response.analysis.score}</p>
+          )}
+          {response.analysis && Array.isArray(response.analysis.suggestions) && (
+            <>
+              <h5>Suggestions:</h5>
+              <ul>
+                {response.analysis.suggestions.map((suggestion, idx) => (
+                  <li key={idx}>{suggestion}</li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       )}
     </div>

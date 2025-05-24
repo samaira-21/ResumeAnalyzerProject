@@ -18,16 +18,36 @@ export default function App() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <NavLink className="nav-link text-white" activeClassName="active" to="/">Home</NavLink>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => "nav-link text-white" + (isActive ? " active" : "")}
+                >
+                  Home
+                </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-white" activeClassName="active" to="/how-it-works">How It Works</NavLink>
+                <NavLink
+                  to="/how-it-works"
+                  className={({ isActive }) => "nav-link text-white" + (isActive ? " active" : "")}
+                >
+                  How It Works
+                </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-white" activeClassName="active" to="/suggestions">Suggestions</NavLink>
+                <NavLink
+                  to="/suggestions"
+                  className={({ isActive }) => "nav-link text-white" + (isActive ? " active" : "")}
+                >
+                  Suggestions
+                </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-white" activeClassName="active" to="/about-us">About Us</NavLink>
+                <NavLink
+                  to="/about-us"
+                  className={({ isActive }) => "nav-link text-white" + (isActive ? " active" : "")}
+                >
+                  About Us
+                </NavLink>
               </li>
             </ul>
           </div>

@@ -2,19 +2,40 @@ import React, { useState } from 'react';
 
 export default function Home() {
   const [file, setFile] = useState(null);
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState('');
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    setResponse(null);
+    setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
-      alert('Please upload your resume first!');
+      setError('Please upload your resume first!');
       return;
     }
-    alert(`Resume "${file.name}" submitted for analysis.`);
-    // Here you will later connect with backend API
+
+    const formData = new FormData();
+    formData.append('resume', file);
+
+    try {
+      const res = await fetch('http://localhost:5000/api/analyze', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error('Upload failed');
+
+      const data = await res.json();
+      setResponse(data);
+      setError('');
+    } catch (err) {
+      setError('Error uploading file. Please try again.');
+      setResponse(null);
+    }
   };
 
   return (
@@ -31,6 +52,32 @@ export default function Home() {
           Analyze Resume
         </button>
       </form>
+
+      {error && <p className="text-danger">{error}</p>}
+
+      {response && (
+        <div className="text-white">
+          <p>
+            <strong>Server says:</strong> {response.message || 'File uploaded'} (File: {response.filename})
+          </p>
+
+          {response.score !== undefined && (
+            <p><strong>Score:</strong> {response.score}</p>
+          )}
+
+          {response.suggestions && response.suggestions.length > 0 && (
+            <>
+              <h5>Suggestions:</h5>
+              <ul>
+                {response.suggestions.map((sugg, idx) => (
+                  <li key={idx}>{sugg}</li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      )}
+
       <p className="text-muted">
         Upload your resume in PDF, DOC, DOCX or TXT format for instant analysis.
       </p>

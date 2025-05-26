@@ -21,7 +21,7 @@ function ResumeUpload() {
     }
 
     const formData = new FormData();
-    formData.append('resume', file);  // key 'resume' must match backend multer field name
+    formData.append('resume', file);
 
     try {
       setLoading(true);

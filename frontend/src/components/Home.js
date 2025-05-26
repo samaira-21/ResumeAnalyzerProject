@@ -77,10 +77,6 @@ export default function Home() {
           )}
         </div>
       )}
-
-      <p className="text-muted">
-        Upload your resume in PDF, DOC, DOCX or TXT format for instant analysis.
-      </p>
     </div>
   );
 }

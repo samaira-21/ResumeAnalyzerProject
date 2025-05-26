@@ -18,7 +18,7 @@ export default function Suggestions() {
           Use concise bullet points starting with strong action verbs like led, developed, optimized.
         </li>
         <li className="list-group-item bg-dark text-white border-warning">
-          Create a dedicated <b>Skills</b> section highlighting both techinal and soft skills relevant to the job.
+          Create a dedicated Skills section highlighting both techinal and soft skills relevant to the job.
         </li>
         <li className="list-group-item bg-dark text-white border-warning">
           Limit your resume to 1-2 pages focused on relevant achievements and experiences.

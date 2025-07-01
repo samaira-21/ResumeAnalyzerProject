@@ -5,8 +5,6 @@ import re
 import argparse
 import string
 
-# Load spaCy model
-nlp = spacy.load("en_core_web_sm")
 
 # Job titles and their associated skills
 tech_jobs_skills = {

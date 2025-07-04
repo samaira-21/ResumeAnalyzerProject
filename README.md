@@ -14,11 +14,17 @@ Features:
 - Minimal, student-friendly design.
 
 Project Structure:
+
 resume-analyzer/
+
 │
+
 ├── backend/          # Node.js + Express backend
+
 ├── frontend/         # React frontend
+
 ├── analysis/         # Python scripts for analysis
+
 └── README.md         # Project documentation
 
 How It Works:

@@ -1,4 +1,5 @@
 RESUMETER: A Resume Analyzer
+
 This is a simple, privacy-focused Resume Analyzer tool built as part of our 4th semester live project.
 It helps students understand how ATS (Applicant Tracking Systems) works and provides actionable suggestions to improve their resumes.
 

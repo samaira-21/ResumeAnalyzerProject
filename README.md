@@ -13,23 +13,9 @@ Features:
 - No sign-up required — just upload and get the analysis.
 - Minimal, student-friendly design.
 
-Project Structure:
-
-resume-analyzer/
-
-│
-
-├── backend/          # Node.js + Express backend
-
-├── frontend/         # React frontend
-
-├── analysis/         # Python scripts for analysis
-
-└── README.md         # Project documentation
-
 How It Works:
 1. User uploads resume (PDF or DOCX).
-2. Backend sends it to Python logic layer.
+2. Backend sends it to the Python logic layer.
 3. Results are analyzed and displayed.
 
 Developed By

@@ -8,9 +8,9 @@ Tech Stack:
 - Logic Layer: Python (for rule-based resume analysis)
 
 Features:
-> No database — resumes are not stored.
-> No sign-up required — just upload and get the analysis.
-> Minimal, student-friendly design.
+- No database — resumes are not stored.
+- No sign-up required — just upload and get the analysis.
+- Minimal, student-friendly design.
 
 Project Structure:
 resume-analyzer/
@@ -26,8 +26,8 @@ How It Works:
 3. Results are analyzed and displayed.
 
 Developed By
-> Samaira Arora
-> Mehar Malhotra
-> Madhav Manchanda
+- Samaira Arora
+- Mehar Malhotra
+- Madhav Manchanda
 
-*This project was built for educational purposes to assist fellow students in improving their resumes.
+>This project was built for educational purposes to assist fellow students in improving their resumes.
